@@ -1,0 +1,137 @@
+{
+    "scene": [
+        {
+            "index": 1,
+            "inputs": [
+                3,
+                4,
+                9,
+                10
+            ],
+            "outputs": [
+                3,
+                4
+            ]
+        },
+        {
+            "index": 2,
+            "inputs": [
+                3
+            ],
+            "outputs": [
+                3
+            ]
+        },
+        {
+            "index": 3,
+            "inputs": [
+                1,
+                2,
+                6
+            ],
+            "outputs": [
+                1,
+                2,
+                4,
+                6
+            ]
+        },
+        {
+            "index": 4,
+            "inputs": [
+                1,
+                3,
+                5
+            ],
+            "outputs": [
+                1,
+                5,
+                6
+            ]
+        },
+        {
+            "index": 5,
+            "inputs": [
+                4
+            ],
+            "outputs": [
+                4
+            ]
+        },
+        {
+            "index": 6,
+            "inputs": [
+                3,
+                4,
+                7
+            ],
+            "outputs": [
+                7,
+                9,
+                10
+            ]
+        },
+        {
+            "index": 7,
+            "inputs": [
+                6
+            ],
+            "outputs": [
+                6
+            ]
+        },
+        {
+            "index": 8,
+            "inputs": [
+                9
+            ],
+            "outputs": [
+                9
+            ]
+        },
+        {
+            "index": 9,
+            "inputs": [
+                6,
+                8,
+                10
+            ],
+            "outputs": [
+                8,
+                10,
+                12
+            ]
+        },
+        {
+            "index": 10,
+            "inputs": [
+                6,
+                9,
+                11
+            ],
+            "outputs": [
+                9,
+                11,
+                12
+            ]
+        },
+        {
+            "index": 11,
+            "inputs": [
+                10
+            ],
+            "outputs": [
+                10
+            ]
+        },
+        {
+            "index": 12,
+            "inputs": [
+                9,
+                10
+            ],
+            "outputs": [
+            ]
+        }
+    ]
+}
