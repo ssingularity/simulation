@@ -8,23 +8,19 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public abstract class AbstractIndividualDTBehavior {
-    final private Long sliceTime;
-
-    public void doTask(Task task) {
-        if (task.getTaskState() == TaskState.Running) {
-            task.elapse(sliceTime);
-        }
-        else {
+    public void doTask(Task task, Long sliceTime) {
+        if (task.getTaskState() == TaskState.Waiting) {
             startTask(task);
             task.running();
         }
+        task.elapse(sliceTime);
     }
 
     /**
      * 设置task的剩余时间并且根据各自实现完成内部状态的变更
      * @param task 任务
      */
-    abstract void startTask(Task task);
+    protected abstract void startTask(Task task);
 
     /**
      * 根据各自状态完成对应的输出

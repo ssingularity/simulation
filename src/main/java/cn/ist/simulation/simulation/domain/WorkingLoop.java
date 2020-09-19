@@ -1,5 +1,6 @@
 package cn.ist.simulation.simulation.domain;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public abstract class WorkingLoop implements Runnable{
+    @Getter
     final private long sliceTime;
 
     @Override

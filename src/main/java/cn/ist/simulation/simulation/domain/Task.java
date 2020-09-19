@@ -37,6 +37,6 @@ public class Task extends SelfValidating<Task> {
     }
 
     public boolean canFinish() {
-        return this.remainingTime <= 0L;
+        return this.taskState == TaskState.Running && this.remainingTime <= 0L;
     }
 }

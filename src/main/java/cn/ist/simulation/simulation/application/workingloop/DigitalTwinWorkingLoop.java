@@ -4,9 +4,10 @@ import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.domain.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @Author: ssingualrity
@@ -20,13 +21,13 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     final private AbstractIndividualDTBehavior individualDTBehavior;
 
-    final private List<Product> physicalTwinInputList = new CopyOnWriteArrayList<>();
+    final private List<Product> physicalTwinInputList = Collections.synchronizedList(new ArrayList<>());
 
-    final private List<DTInput> digitalTwinInputList = new CopyOnWriteArrayList<>();
+    final private List<DTInput> digitalTwinInputList = Collections.synchronizedList(new ArrayList<>());
 
-    final private List<Task> onGoingTask = new CopyOnWriteArrayList<>();
+    final private List<Task> onGoingTask = Collections.synchronizedList(new ArrayList<>());
 
-    final private List<DTInput> finishedProducts = new CopyOnWriteArrayList<>();
+    final private List<DTInput> finishedProducts = Collections.synchronizedList(new ArrayList<>());
 
     public DigitalTwinWorkingLoop(long sliceTime, FetchDigitalTwinPort fetchDigitalTwinPort, Integer index, AbstractIndividualDTBehavior individualDTBehavior) {
         super(sliceTime);
@@ -54,18 +55,19 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
         while (dtInputIterator.hasNext()) {
             DTInput dtInput = dtInputIterator.next();
             String dtId = dtInput.getId();
-            boolean canRemove = false;
+            boolean cauaslityMatched = false;
             Iterator<Product> productIterator = physicalTwinInputList.iterator();
             while (productIterator.hasNext()) {
                 Product product = productIterator.next();
                 if (product.getId().equals(dtId)) {
-                    canRemove = true;
+                    cauaslityMatched = true;
                     productIterator.remove();
                     break;
                 }
             }
-            if (canRemove) {
+            if (cauaslityMatched) {
                 dtInputIterator.remove();
+                onGoingTask.add(new Task(dtInput));
             }
         }
     }
@@ -79,7 +81,7 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
                 finishedProducts.add(task.getProduct());
             }
             else {
-                individualDTBehavior.doTask(task);
+                individualDTBehavior.doTask(task, super.getSliceTime());
             }
         }
     }
