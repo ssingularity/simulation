@@ -1,11 +1,8 @@
 package cn.ist.simulation.simulation.domain;
 
-import lombok.Data;
-
 /**
  * @Author: ssingualrity
- * @Date: 2020/9/16 14:42
+ * @Date: 2020/9/22 16:30
  */
-@Data
-public class Rule {
+public abstract class AbstractIndividualPTBehavior {
 }

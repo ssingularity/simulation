@@ -2,11 +2,11 @@ package cn.ist.simulation.simulation.application.service;
 
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
+import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DigitalTwin;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 /**
@@ -16,8 +16,9 @@ import org.mockito.Mockito;
 class DigitalTwinUseCaseImplTest {
     private FetchDigitalTwinPort fetchDigitalTwinPort = Mockito.mock(FetchDigitalTwinPort.class);
 
-    @Mock
     private StoreDigitalTwinPort storeDigitalTwinPort = Mockito.mock(StoreDigitalTwinPort.class);
+
+    AbstractIndividualDTBehavior individualDTBehavior = Mockito.mock(AbstractIndividualDTBehavior.class);
 
     private DigitalTwinUseCaseImpl digitalTwinUseCase;
 
@@ -29,7 +30,7 @@ class DigitalTwinUseCaseImplTest {
     @Test
     void createDigitalTwin() {
         Mockito.when(fetchDigitalTwinPort.existsByIndex(0)).thenReturn(false);
-        this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0, ""));
+        this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0, ""), individualDTBehavior);
         Assertions.assertThat(this.digitalTwinUseCase.getWorkingLoopMap()).size().isEqualTo(1);
         Assertions.assertThat(this.digitalTwinUseCase.getWorkingLoopMap()).containsKeys(0);
     }
@@ -37,6 +38,6 @@ class DigitalTwinUseCaseImplTest {
     @Test
     void createDigitalExistingTwin() {
         Mockito.when(fetchDigitalTwinPort.existsByIndex(0)).thenReturn(true);
-        Assertions.assertThatThrownBy(() -> this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0, ""))).isInstanceOf(RuntimeException.class);
+        Assertions.assertThatThrownBy(() -> this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0, ""), individualDTBehavior)).isInstanceOf(RuntimeException.class);
     }
 }

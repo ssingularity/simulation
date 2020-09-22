@@ -24,8 +24,7 @@ public abstract class AbstractIndividualDTBehavior {
 
     /**
      * 根据各自状态完成对应的输出
-     * @param dt 对应的DigitalTwin
      * @param product 完成的产物
      */
-    public abstract void doOutput(DigitalTwin dt, DTInput product);
+    public abstract void doOutput(DTInput product);
 }

@@ -2,7 +2,6 @@ package cn.ist.simulation.simulation.application.port.behavior;
 
 import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DTInput;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
 import cn.ist.simulation.simulation.domain.Task;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,18 +11,16 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class TestIndividualDTBehavior extends AbstractIndividualDTBehavior {
-    public boolean started = false;
-
-    public boolean finished = false;
+    public int workingProduct = 0;
 
     @Override
     protected void startTask(Task task) {
         task.setRemainingTime(1000L);
-        this.started = true;
+        this.workingProduct++;
     }
 
     @Override
-    public void doOutput(DigitalTwin dt, DTInput product) {
-        this.finished = true;
+    public void doOutput(DTInput product) {
+        this.workingProduct--;
     }
 }

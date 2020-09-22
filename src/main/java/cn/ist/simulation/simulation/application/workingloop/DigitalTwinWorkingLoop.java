@@ -1,6 +1,5 @@
 package cn.ist.simulation.simulation.application.workingloop;
 
-import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.domain.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,8 +14,6 @@ import java.util.List;
  */
 @Slf4j
 public class DigitalTwinWorkingLoop extends WorkingLoop {
-    final private FetchDigitalTwinPort fetchDigitalTwinPort;
-
     final private Integer index;
 
     final private AbstractIndividualDTBehavior individualDTBehavior;
@@ -29,13 +26,11 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     final private List<DTInput> finishedProducts = Collections.synchronizedList(new ArrayList<>());
 
-    public DigitalTwinWorkingLoop(long sliceTime, FetchDigitalTwinPort fetchDigitalTwinPort, Integer index, AbstractIndividualDTBehavior individualDTBehavior) {
+    public DigitalTwinWorkingLoop(long sliceTime, Integer index, AbstractIndividualDTBehavior individualDTBehavior) {
         super(sliceTime);
-        this.fetchDigitalTwinPort = fetchDigitalTwinPort;
         this.index = index;
         this.individualDTBehavior = individualDTBehavior;
     }
-
 
 
     @Override
@@ -50,29 +45,33 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     }
 
-    void checkCausality() {
+    private void checkCausality() {
         Iterator<DTInput> dtInputIterator = digitalTwinInputList.iterator();
         while (dtInputIterator.hasNext()) {
             DTInput dtInput = dtInputIterator.next();
             String dtId = dtInput.getId();
-            boolean cauaslityMatched = false;
+            boolean causalityMatched = false;
             Iterator<Product> productIterator = physicalTwinInputList.iterator();
             while (productIterator.hasNext()) {
                 Product product = productIterator.next();
+                //FIXME 不能简单地通过Id进行验证
                 if (product.getId().equals(dtId)) {
-                    cauaslityMatched = true;
+                    causalityMatched = true;
                     productIterator.remove();
                     break;
                 }
             }
-            if (cauaslityMatched) {
+            if (causalityMatched) {
                 dtInputIterator.remove();
                 onGoingTask.add(new Task(dtInput));
+            }
+            else {
+                break;
             }
         }
     }
 
-    void processTasks() {
+    private void processTasks() {
         Iterator<Task> it = onGoingTask.iterator();
         while (it.hasNext()) {
             Task task = it.next();
@@ -88,10 +87,9 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     private void doOutPut() {
         Iterator<DTInput> it = finishedProducts.iterator();
-        DigitalTwin digitalTwin = fetchDigitalTwinPort.fetchDigitalTwin(index);
         while (it.hasNext()) {
             DTInput product = it.next();
-            individualDTBehavior.doOutput(digitalTwin, product);
+            individualDTBehavior.doOutput(product);
             it.remove();
         }
     }
@@ -107,5 +105,4 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
     public void handleUpdate() {
 
     }
-
 }

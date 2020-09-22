@@ -10,6 +10,12 @@ import java.util.Map;
  * @Date: 2020/9/19 16:13
  */
 @Data
-public class DTInput extends Product{
+public class DTInput {
+    private Product product;
+
     private Map<Integer, Integer> vector = new HashMap<>();
+
+    public String getId() {
+        return product.getId();
+    }
 }

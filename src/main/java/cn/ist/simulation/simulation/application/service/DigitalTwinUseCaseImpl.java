@@ -5,6 +5,7 @@ import cn.ist.simulation.simulation.application.port.in.InputDigitalTwinUseCase;
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
 import cn.ist.simulation.simulation.application.workingloop.DigitalTwinWorkingLoop;
+import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DigitalTwin;
 import lombok.Data;
 
@@ -33,13 +34,13 @@ public class DigitalTwinUseCaseImpl implements CreateDigitalTwinUseCase, InputDi
     }
 
     @Override
-    public void createDigitalTwin(DigitalTwin digitalTwin) {
-        storeDigitalTwinPort.storeDigitalTwin(digitalTwin);
+    public void createDigitalTwin(DigitalTwin digitalTwin, AbstractIndividualDTBehavior individualDTBehavior) {
         Integer index = digitalTwin.getIndex();
         if (fetchDigitalTwinPort.existsByIndex(index)) {
             throw new RuntimeException("Index为" + index + "的Digital Twin已存在");
         }
-        DigitalTwinWorkingLoop digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(500, fetchDigitalTwinPort, index, null);
+        storeDigitalTwinPort.storeDigitalTwin(digitalTwin);
+        DigitalTwinWorkingLoop digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(500, index, individualDTBehavior);
         workingLoopMap.put(index, digitalTwinWorkingLoop);
         threadPool.submit(digitalTwinWorkingLoop);
     }

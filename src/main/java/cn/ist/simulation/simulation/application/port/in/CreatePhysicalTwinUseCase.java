@@ -1,5 +1,6 @@
 package cn.ist.simulation.simulation.application.port.in;
 
+import cn.ist.simulation.simulation.domain.AbstractIndividualPTBehavior;
 import cn.ist.simulation.simulation.domain.PhysicalTwin;
 
 /**
@@ -7,5 +8,10 @@ import cn.ist.simulation.simulation.domain.PhysicalTwin;
  * @Date: 2020/9/17 12:34
  */
 public interface CreatePhysicalTwinUseCase {
-    void createPhysicalTwin(PhysicalTwin physicalTwin);
+    /**
+     * 创建对应的PT
+     * @param physicalTwin 创建的PT
+     * @param individualPTBehavior PT对应的个性化行为，通过Adapter层进行注入
+     */
+    void createPhysicalTwin(PhysicalTwin physicalTwin, AbstractIndividualPTBehavior individualPTBehavior);
 }

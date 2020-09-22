@@ -1,13 +1,11 @@
 package cn.ist.simulation.simulation.application.workingloop;
 
 import cn.ist.simulation.simulation.application.port.behavior.TestIndividualDTBehavior;
-import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.domain.DTInput;
 import cn.ist.simulation.simulation.domain.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 /**
  * @Author: ssingualrity
@@ -19,30 +17,57 @@ class DigitalTwinWorkingLoopTest {
     TestIndividualDTBehavior testIndividualDTBehavior = new TestIndividualDTBehavior();
 
     @BeforeEach
-    public void init() {
-        digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(1000L, Mockito.mock(FetchDigitalTwinPort.class), 0, testIndividualDTBehavior);
+    void init() {
+        digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(1000L, 0, testIndividualDTBehavior);
     }
 
     @Test
     public void testDigitalTwinWorkingLoop() {
+        Product product = new Product();
+        product.setId("1");
+
         DTInput dtInput = new DTInput();
-        dtInput.setId("1");
+        dtInput.setProduct(product);
+
         digitalTwinWorkingLoop.handleInputFromNeighbor(dtInput);
 
         digitalTwinWorkingLoop.doTask();
-        Assertions.assertThat(testIndividualDTBehavior.started).isEqualTo(false);
-        Assertions.assertThat(testIndividualDTBehavior.finished).isEqualTo(false);
-
-        Product product = new Product();
-        product.setId("1");
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
         digitalTwinWorkingLoop.handleInputFromPt(product);
 
         digitalTwinWorkingLoop.doTask();
-        Assertions.assertThat(testIndividualDTBehavior.started).isEqualTo(true);
-        Assertions.assertThat(testIndividualDTBehavior.finished).isEqualTo(false);
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
 
         digitalTwinWorkingLoop.doTask();
-        Assertions.assertThat(testIndividualDTBehavior.started).isEqualTo(true);
-        Assertions.assertThat(testIndividualDTBehavior.finished).isEqualTo(true);
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
+    }
+
+    @Test
+    public void testDigitalTwinWorkingLoopWithCausality() {
+        Product firstProduct = new Product();
+        firstProduct.setId("1");
+        Product laterProduct = new Product();
+        laterProduct.setId("2");
+
+        DTInput firstDtInput = new DTInput();
+        firstDtInput.setProduct(firstProduct);
+        DTInput laterDtInput = new DTInput();
+        laterDtInput.setProduct(laterProduct);
+
+        digitalTwinWorkingLoop.handleInputFromNeighbor(firstDtInput);
+        digitalTwinWorkingLoop.handleInputFromNeighbor(laterDtInput);
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
+
+        digitalTwinWorkingLoop.handleInputFromPt(laterProduct);
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
+
+        digitalTwinWorkingLoop.handleInputFromPt(firstProduct);
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(2);
+
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }
 }

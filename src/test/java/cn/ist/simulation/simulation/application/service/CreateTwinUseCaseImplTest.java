@@ -1,6 +1,8 @@
 package cn.ist.simulation.simulation.application.service;
 
 import cn.ist.simulation.simulation.application.port.in.*;
+import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.AbstractIndividualPTBehavior;
 import cn.ist.simulation.simulation.domain.DigitalTwin;
 import cn.ist.simulation.simulation.domain.PhysicalTwin;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +18,10 @@ class CreateTwinUseCaseImplTest {
 
     CreatePhysicalTwinUseCase createPhysicalTwinUseCase = Mockito.mock(CreatePhysicalTwinUseCase.class);
 
+    AbstractIndividualDTBehavior individualDTBehavior = Mockito.mock(AbstractIndividualDTBehavior.class);
+
+    AbstractIndividualPTBehavior individualPTBehavior = Mockito.mock(AbstractIndividualPTBehavior.class);
+
     CreateTwinUseCaseImpl createTwinUseCase;
 
     @BeforeEach
@@ -25,8 +31,8 @@ class CreateTwinUseCaseImplTest {
 
     @Test
     void createTwin() {
-        this.createTwinUseCase.createTwin(new CreateTwinCommand(0, ""));
-        Mockito.verify(createDigitalTwinUseCase).createDigitalTwin(new DigitalTwin(0, ""));
-        Mockito.verify(createPhysicalTwinUseCase).createPhysicalTwin(new PhysicalTwin(0, ""));
+        this.createTwinUseCase.createTwin(new CreateTwinCommand(0, "", individualDTBehavior, individualPTBehavior));
+        Mockito.verify(createDigitalTwinUseCase).createDigitalTwin(new DigitalTwin(0, ""), individualDTBehavior);
+        Mockito.verify(createPhysicalTwinUseCase).createPhysicalTwin(new PhysicalTwin(0, ""), individualPTBehavior);
     }
 }
