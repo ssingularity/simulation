@@ -4,9 +4,9 @@ import cn.ist.simulation.simulation.application.port.in.CreateDigitalTwinUseCase
 import cn.ist.simulation.simulation.application.port.in.InputDigitalTwinUseCase;
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
-import cn.ist.simulation.simulation.application.workingloop.DigitalTwinWorkingLoop;
-import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
+import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 import lombok.Data;
 
 import java.util.Map;

@@ -1,5 +1,6 @@
-package cn.ist.simulation.simulation.domain;
+package cn.ist.simulation.simulation.domain.DT;
 
+import cn.ist.simulation.simulation.domain.Product;
 import lombok.Data;
 
 import java.util.HashMap;

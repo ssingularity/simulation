@@ -1,7 +1,8 @@
-package cn.ist.simulation.simulation.application.workingloop;
+package cn.ist.simulation.simulation.domain.workingloop;
 
 import cn.ist.simulation.simulation.application.port.behavior.TestIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.DTInput;
+import cn.ist.simulation.simulation.domain.DT.DTInput;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
 import cn.ist.simulation.simulation.domain.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

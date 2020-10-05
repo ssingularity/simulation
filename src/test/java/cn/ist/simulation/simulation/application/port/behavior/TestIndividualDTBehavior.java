@@ -1,7 +1,7 @@
 package cn.ist.simulation.simulation.application.port.behavior;
 
-import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.DTInput;
+import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.DT.DTInput;
 import cn.ist.simulation.simulation.domain.Task;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,8 +15,12 @@ public class TestIndividualDTBehavior extends AbstractIndividualDTBehavior {
 
     @Override
     protected void startTask(Task task) {
-        task.setRemainingTime(1000L);
         this.workingProduct++;
+    }
+
+    @Override
+    protected long getTaskTime() {
+        return 1000L;
     }
 
     @Override

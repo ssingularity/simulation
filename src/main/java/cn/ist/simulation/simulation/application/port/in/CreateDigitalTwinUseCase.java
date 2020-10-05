@@ -1,7 +1,7 @@
 package cn.ist.simulation.simulation.application.port.in;
 
-import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
+import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 
 /**
  * @Author: ssingualrity

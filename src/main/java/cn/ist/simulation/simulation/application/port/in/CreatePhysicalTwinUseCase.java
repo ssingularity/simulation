@@ -1,7 +1,7 @@
 package cn.ist.simulation.simulation.application.port.in;
 
-import cn.ist.simulation.simulation.domain.AbstractIndividualPTBehavior;
-import cn.ist.simulation.simulation.domain.PhysicalTwin;
+import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
+import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
 
 /**
  * @Author: ssingualrity

@@ -1,6 +1,7 @@
 package cn.ist.simulation.simulation.domain;
 
 import cn.ist.simulation.simulation.common.SelfValidating;
+import cn.ist.simulation.simulation.domain.DT.DTInput;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,11 +29,11 @@ public class Task extends SelfValidating<Task> {
         this.validateSelf();
     }
 
-    void elapse(Long time) {
+    public void elapse(Long time) {
         this.remainingTime -= time;
     }
 
-    void running() {
+    public void running() {
         this.taskState = TaskState.Running;
     }
 

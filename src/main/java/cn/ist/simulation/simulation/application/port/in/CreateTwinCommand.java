@@ -1,8 +1,8 @@
 package cn.ist.simulation.simulation.application.port.in;
 
 import cn.ist.simulation.simulation.common.SelfValidating;
-import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.AbstractIndividualPTBehavior;
+import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

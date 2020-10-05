@@ -1,10 +1,10 @@
 package cn.ist.simulation.simulation.application.service;
 
 import cn.ist.simulation.simulation.application.port.in.*;
-import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.AbstractIndividualPTBehavior;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
-import cn.ist.simulation.simulation.domain.PhysicalTwin;
+import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
+import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

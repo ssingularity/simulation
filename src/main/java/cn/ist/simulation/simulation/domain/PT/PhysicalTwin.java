@@ -1,5 +1,6 @@
-package cn.ist.simulation.simulation.domain;
+package cn.ist.simulation.simulation.domain.PT;
 
+import cn.ist.simulation.simulation.domain.Neighbor;
 import lombok.Data;
 
 import java.util.HashSet;

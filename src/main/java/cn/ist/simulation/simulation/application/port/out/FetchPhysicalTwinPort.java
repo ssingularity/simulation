@@ -1,6 +1,6 @@
 package cn.ist.simulation.simulation.application.port.out;
 
-import cn.ist.simulation.simulation.domain.PhysicalTwin;
+import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
 
 /**
  * @Author: ssingualrity

@@ -1,6 +1,8 @@
-package cn.ist.simulation.simulation.application.workingloop;
+package cn.ist.simulation.simulation.domain.DT;
 
-import cn.ist.simulation.simulation.domain.*;
+import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.Task;
+import cn.ist.simulation.simulation.domain.WorkingLoop;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -35,7 +37,6 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     @Override
     public void doTask() {
-        log.info("Digital Twin[index = {}] is working", this.index);
         //检查因果关系以及是否存在可以开始处理的Task
         checkCausality();
         //完成业务场景

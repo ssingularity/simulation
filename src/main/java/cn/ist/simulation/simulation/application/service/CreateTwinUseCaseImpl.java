@@ -1,8 +1,8 @@
 package cn.ist.simulation.simulation.application.service;
 
 import cn.ist.simulation.simulation.application.port.in.*;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
-import cn.ist.simulation.simulation.domain.PhysicalTwin;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
+import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
 import lombok.AllArgsConstructor;
 
 /**

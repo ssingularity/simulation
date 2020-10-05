@@ -7,8 +7,8 @@ import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.FetchPhysicalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StorePhysicalTwinPort;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
-import cn.ist.simulation.simulation.domain.PhysicalTwin;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
+import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
 import lombok.AllArgsConstructor;
 import org.springframework.util.Assert;
 

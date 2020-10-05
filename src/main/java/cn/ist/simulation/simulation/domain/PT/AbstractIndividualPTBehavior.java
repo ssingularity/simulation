@@ -1,4 +1,4 @@
-package cn.ist.simulation.simulation.domain;
+package cn.ist.simulation.simulation.domain.PT;
 
 /**
  * @Author: ssingualrity

@@ -1,6 +1,6 @@
 package cn.ist.simulation.simulation.application.port.out;
 
-import cn.ist.simulation.simulation.domain.DigitalTwin;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 
 /**
  * @Author: ssingualrity

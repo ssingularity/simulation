@@ -2,8 +2,8 @@ package cn.ist.simulation.simulation.application.service;
 
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
-import cn.ist.simulation.simulation.domain.AbstractIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.DigitalTwin;
+import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

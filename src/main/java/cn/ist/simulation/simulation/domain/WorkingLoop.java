@@ -21,6 +21,7 @@ public abstract class WorkingLoop implements Runnable{
             try {
                 Thread.sleep(sliceTime);
             } catch (InterruptedException e) {
+                log.info("Exit From WorkingLoop");
                 break;
             }
         }
