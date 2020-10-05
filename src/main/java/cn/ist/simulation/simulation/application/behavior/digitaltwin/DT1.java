@@ -3,7 +3,7 @@ package cn.ist.simulation.simulation.application.behavior.digitaltwin;
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DT.DTInput;
-import cn.ist.simulation.simulation.domain.Task;
+import cn.ist.simulation.simulation.domain.DT.DTTask;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -17,7 +17,7 @@ public class DT1 extends AbstractIndividualDTBehavior {
     private final Integer index;
 
     @Override
-    protected void startTask(Task task) {
+    protected void preStartTask(DTTask dtTask) {
 
     }
 

@@ -2,7 +2,7 @@ package cn.ist.simulation.simulation.application.port.behavior;
 
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DT.DTInput;
-import cn.ist.simulation.simulation.domain.Task;
+import cn.ist.simulation.simulation.domain.DT.DTTask;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,7 +14,7 @@ public class TestIndividualDTBehavior extends AbstractIndividualDTBehavior {
     public int workingProduct = 0;
 
     @Override
-    protected void startTask(Task task) {
+    protected void preStartTask(DTTask dtTask) {
         this.workingProduct++;
     }
 

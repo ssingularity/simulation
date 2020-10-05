@@ -1,7 +1,6 @@
 package cn.ist.simulation.simulation.domain.DT;
 
 import cn.ist.simulation.simulation.domain.Product;
-import cn.ist.simulation.simulation.domain.Task;
 import cn.ist.simulation.simulation.domain.WorkingLoop;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +23,7 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     final private List<DTInput> digitalTwinInputList = Collections.synchronizedList(new ArrayList<>());
 
-    final private List<Task> onGoingTask = Collections.synchronizedList(new ArrayList<>());
+    final private List<DTTask> onGoingDTTask = Collections.synchronizedList(new ArrayList<>());
 
     final private List<DTInput> finishedDTInputList = Collections.synchronizedList(new ArrayList<>());
 
@@ -44,9 +43,10 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
      */
     @Override
     public void doTask() {
+        //TODO 可能需要检查一下是否OverLoad了
         checkCausality();
         processTasks();
-        doOutPut();
+        processFinishedDTInput();
     }
 
     private void checkCausality() {
@@ -58,7 +58,6 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
             Iterator<Product> productIterator = physicalTwinInputList.iterator();
             while (productIterator.hasNext()) {
                 Product product = productIterator.next();
-                //FIXME 不能简单地通过Id进行验证
                 if (product.getId().equals(dtId)) {
                     causalityMatched = true;
                     productIterator.remove();
@@ -67,7 +66,7 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
             }
             if (causalityMatched) {
                 dtInputIterator.remove();
-                onGoingTask.add(new Task(dtInput));
+                onGoingDTTask.add(new DTTask(dtInput));
             }
             else {
                 break;
@@ -76,20 +75,20 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
     }
 
     private void processTasks() {
-        Iterator<Task> it = onGoingTask.iterator();
+        Iterator<DTTask> it = onGoingDTTask.iterator();
         while (it.hasNext()) {
-            Task task = it.next();
-            if (task.canFinish()) {
+            DTTask DTTask = it.next();
+            if (DTTask.canFinish()) {
                 it.remove();
-                finishedDTInputList.add(task.getDtInput());
+                finishedDTInputList.add(DTTask.getDtInput());
             }
             else {
-                individualDTBehavior.doTask(task, super.getSliceTime());
+                individualDTBehavior.doTask(DTTask, super.getSliceTime());
             }
         }
     }
 
-    private void doOutPut() {
+    private void processFinishedDTInput() {
         Iterator<DTInput> it = finishedDTInputList.iterator();
         while (it.hasNext()) {
             DTInput finishedDTInput = it.next();
@@ -116,5 +115,13 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     public void handleOutputFromPt(Product product) {
         this.physicalTwinOutputList.add(product);
+    }
+
+    public void handleStateUpdateFromNeighbor() {
+        //TODO 处理来自Neighbor的状态更新
+    }
+
+    public void handleStateUpdateFromPT() {
+        //TODO 处理来自PT的状态更新
     }
 }

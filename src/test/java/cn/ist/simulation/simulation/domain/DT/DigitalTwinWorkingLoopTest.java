@@ -1,8 +1,6 @@
-package cn.ist.simulation.simulation.domain.workingloop;
+package cn.ist.simulation.simulation.domain.DT;
 
 import cn.ist.simulation.simulation.application.port.behavior.TestIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.DT.DTInput;
-import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
 import cn.ist.simulation.simulation.domain.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @Author: ssingualrity
- * @Date: 2020/9/19 17:15
+ * @Date: 2020/10/5 14:45
  */
 class DigitalTwinWorkingLoopTest {
     DigitalTwinWorkingLoop digitalTwinWorkingLoop;
@@ -99,4 +97,5 @@ class DigitalTwinWorkingLoopTest {
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }
+
 }

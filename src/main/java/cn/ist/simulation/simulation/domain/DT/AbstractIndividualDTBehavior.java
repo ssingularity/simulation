@@ -1,29 +1,23 @@
 package cn.ist.simulation.simulation.domain.DT;
 
-import cn.ist.simulation.simulation.domain.Task;
-import cn.ist.simulation.simulation.domain.TaskState;
-import lombok.RequiredArgsConstructor;
-
 /**
  * @Author: ssingualrity
  * @Date: 2020/9/19 14:26
  */
-@RequiredArgsConstructor
 public abstract class AbstractIndividualDTBehavior {
-    void doTask(Task task, Long sliceTime) {
-        if (task.getTaskState() == TaskState.Waiting) {
-            task.setRemainingTime(getTaskTime());
-            startTask(task);
-            task.running();
+    void doTask(DTTask dtTask, Long sliceTime) {
+        if (dtTask.isWaiting()) {
+            preStartTask(dtTask);
+            dtTask.runWith(getTaskTime());
         }
-        task.elapse(sliceTime);
+        dtTask.elapse(sliceTime);
     }
 
     /**
      * 设置根据各自实现完成内部状态的变更
-     * @param task 任务
+     * @param dtTask 任务
      */
-    protected abstract void startTask(Task task);
+    protected abstract void preStartTask(DTTask dtTask);
 
     /**
      * 根据各自状态完成对应的输出
