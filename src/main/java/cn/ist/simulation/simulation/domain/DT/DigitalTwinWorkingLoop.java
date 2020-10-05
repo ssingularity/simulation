@@ -16,34 +16,37 @@ import java.util.List;
  */
 @Slf4j
 public class DigitalTwinWorkingLoop extends WorkingLoop {
-    final private Integer index;
-
     final private AbstractIndividualDTBehavior individualDTBehavior;
 
     final private List<Product> physicalTwinInputList = Collections.synchronizedList(new ArrayList<>());
+
+    final private List<Product> physicalTwinOutputList = Collections.synchronizedList(new ArrayList<>());
 
     final private List<DTInput> digitalTwinInputList = Collections.synchronizedList(new ArrayList<>());
 
     final private List<Task> onGoingTask = Collections.synchronizedList(new ArrayList<>());
 
-    final private List<DTInput> finishedProducts = Collections.synchronizedList(new ArrayList<>());
+    final private List<DTInput> finishedDTInputList = Collections.synchronizedList(new ArrayList<>());
 
-    public DigitalTwinWorkingLoop(long sliceTime, Integer index, AbstractIndividualDTBehavior individualDTBehavior) {
+    public DigitalTwinWorkingLoop(long sliceTime, AbstractIndividualDTBehavior individualDTBehavior) {
         super(sliceTime);
-        this.index = index;
         this.individualDTBehavior = individualDTBehavior;
     }
 
 
+    /**
+     * 完成基于切片方式的任务处理
+     *
+     * 大致流程如下：
+     * 1. 检查因果关系以及是否存在可以开始处理的Task
+     * 2. 完成业务场景
+     * 3. 处理输出
+     */
     @Override
     public void doTask() {
-        //检查因果关系以及是否存在可以开始处理的Task
         checkCausality();
-        //完成业务场景
         processTasks();
-        //处理输出
         doOutPut();
-
     }
 
     private void checkCausality() {
@@ -78,7 +81,7 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
             Task task = it.next();
             if (task.canFinish()) {
                 it.remove();
-                finishedProducts.add(task.getProduct());
+                finishedDTInputList.add(task.getDtInput());
             }
             else {
                 individualDTBehavior.doTask(task, super.getSliceTime());
@@ -87,11 +90,19 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
     }
 
     private void doOutPut() {
-        Iterator<DTInput> it = finishedProducts.iterator();
+        Iterator<DTInput> it = finishedDTInputList.iterator();
         while (it.hasNext()) {
-            DTInput product = it.next();
-            individualDTBehavior.doOutput(product);
-            it.remove();
+            DTInput finishedDTInput = it.next();
+            Iterator<Product> ptIt = physicalTwinOutputList.iterator();
+            while (ptIt.hasNext()) {
+                Product ptOutput = ptIt.next();
+                if (ptOutput.getId().equals(finishedDTInput.getId())) {
+                    individualDTBehavior.doOutput(finishedDTInput);
+                    ptIt.remove();
+                    it.remove();
+                    break;
+                }
+            }
         }
     }
 
@@ -103,7 +114,7 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
         this.physicalTwinInputList.add(product);
     }
 
-    public void handleUpdate() {
-
+    public void handleOutputFromPt(Product product) {
+        this.physicalTwinOutputList.add(product);
     }
 }

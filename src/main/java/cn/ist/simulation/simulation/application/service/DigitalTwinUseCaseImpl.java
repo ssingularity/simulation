@@ -40,7 +40,7 @@ public class DigitalTwinUseCaseImpl implements CreateDigitalTwinUseCase, InputDi
             throw new RuntimeException("Index为" + index + "的Digital Twin已存在");
         }
         storeDigitalTwinPort.storeDigitalTwin(digitalTwin);
-        DigitalTwinWorkingLoop digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(500, index, individualDTBehavior);
+        DigitalTwinWorkingLoop digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(500, individualDTBehavior);
         workingLoopMap.put(index, digitalTwinWorkingLoop);
         threadPool.submit(digitalTwinWorkingLoop);
     }

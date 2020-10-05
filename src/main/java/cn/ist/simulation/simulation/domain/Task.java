@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Task extends SelfValidating<Task> {
     @NotNull
     @Getter
-    final DTInput product;
+    final DTInput dtInput;
 
     @Setter
     private Long remainingTime;
@@ -22,8 +22,8 @@ public class Task extends SelfValidating<Task> {
     @Getter
     private TaskState taskState;
 
-    public Task(DTInput product) {
-        this.product = product;
+    public Task(DTInput dtInput) {
+        this.dtInput = dtInput;
         this.remainingTime = -1L;
         this.taskState = TaskState.Waiting;
         this.validateSelf();

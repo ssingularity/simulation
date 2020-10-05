@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public abstract class AbstractIndividualDTBehavior {
-    public void doTask(Task task, Long sliceTime) {
+    void doTask(Task task, Long sliceTime) {
         if (task.getTaskState() == TaskState.Waiting) {
             task.setRemainingTime(getTaskTime());
             startTask(task);

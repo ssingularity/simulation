@@ -19,7 +19,7 @@ class DigitalTwinWorkingLoopTest {
 
     @BeforeEach
     void init() {
-        digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(1000L, 0, testIndividualDTBehavior);
+        digitalTwinWorkingLoop = new DigitalTwinWorkingLoop(1000L, testIndividualDTBehavior);
     }
 
     @Test
@@ -39,6 +39,7 @@ class DigitalTwinWorkingLoopTest {
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
 
+        digitalTwinWorkingLoop.handleOutputFromPt(product);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }
@@ -68,6 +69,33 @@ class DigitalTwinWorkingLoopTest {
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(2);
 
+        digitalTwinWorkingLoop.handleOutputFromPt(firstProduct);
+        digitalTwinWorkingLoop.handleOutputFromPt(laterProduct);
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
+    }
+
+    @Test
+    public void testDigitalTwinWorkingLoopWithOutputFromPT() {
+        Product product = new Product();
+        product.setId("1");
+
+        DTInput dtInput = new DTInput();
+        dtInput.setProduct(product);
+
+        digitalTwinWorkingLoop.handleInputFromNeighbor(dtInput);
+
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
+        digitalTwinWorkingLoop.handleInputFromPt(product);
+
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
+
+        digitalTwinWorkingLoop.doTask();
+        Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
+
+        digitalTwinWorkingLoop.handleOutputFromPt(product);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }
