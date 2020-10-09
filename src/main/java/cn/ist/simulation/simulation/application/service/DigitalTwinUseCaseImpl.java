@@ -3,10 +3,12 @@ package cn.ist.simulation.simulation.application.service;
 import cn.ist.simulation.simulation.application.port.in.CreateDigitalTwinUseCase;
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
+import cn.ist.simulation.simulation.common.DefaultThreadFactory;
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,6 +20,7 @@ import java.util.concurrent.Executors;
  * @Date: 2020/9/17 12:46
  */
 @Data
+@RequiredArgsConstructor
 public class DigitalTwinUseCaseImpl implements CreateDigitalTwinUseCase {
     final private FetchDigitalTwinPort fetchDigitalTwinPort;
 
@@ -25,12 +28,7 @@ public class DigitalTwinUseCaseImpl implements CreateDigitalTwinUseCase {
 
     final private Map<Integer, DigitalTwinWorkingLoop> workingLoopMap = new ConcurrentHashMap<>();
 
-    final private ExecutorService threadPool = Executors.newCachedThreadPool();
-
-    public DigitalTwinUseCaseImpl(FetchDigitalTwinPort fetchDigitalTwinPort, StoreDigitalTwinPort storeDigitalTwinPort) {
-        this.fetchDigitalTwinPort = fetchDigitalTwinPort;
-        this.storeDigitalTwinPort = storeDigitalTwinPort;
-    }
+    final private ExecutorService threadPool = Executors.newCachedThreadPool(new DefaultThreadFactory("DTWorkingLoop"));
 
     @Override
     public void createDigitalTwin(DigitalTwin digitalTwin, AbstractIndividualDTBehavior individualDTBehavior) {

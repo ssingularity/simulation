@@ -6,7 +6,6 @@ import cn.ist.simulation.simulation.domain.DT.DTInput;
 import cn.ist.simulation.simulation.domain.DT.DTTask;
 import cn.ist.simulation.simulation.domain.Product;
 import cn.ist.simulation.simulation.domain.ProductType;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -17,15 +16,17 @@ import java.util.Map;
  * @Date: 2020/9/23 14:55
  */
 @Slf4j
-@RequiredArgsConstructor
 public class DT1 extends AbstractIndividualDTBehavior {
-    private final Integer index;
+    final private CallDTFromNeighborApi callDTFromNeighborApi;
 
-    private final CallDTFromNeighborApi callDTFromNeighborApi;
-
-    private final Map<Integer, Integer> V = new HashMap<>();
+    final private Map<Integer, Integer> V = new HashMap<>();
 
     private Boolean primary = true;
+
+    public DT1(Integer index, Long taskTime, CallDTFromNeighborApi callDTFromNeighborApi) {
+        super(index, taskTime);
+        this.callDTFromNeighborApi = callDTFromNeighborApi;
+    }
 
     @Override
     protected void preStartTask(DTTask dtTask) {
@@ -43,10 +44,5 @@ public class DT1 extends AbstractIndividualDTBehavior {
         else {
             callDTFromNeighborApi.call(4, dtInput);
         }
-    }
-
-    @Override
-    protected long getTaskTime() {
-        return 1000L;
     }
 }

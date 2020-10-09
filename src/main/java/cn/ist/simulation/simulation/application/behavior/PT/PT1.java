@@ -7,7 +7,6 @@ import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
 import cn.ist.simulation.simulation.domain.PT.PTTask;
 import cn.ist.simulation.simulation.domain.Product;
 import cn.ist.simulation.simulation.domain.ProductType;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,17 +14,24 @@ import lombok.extern.slf4j.Slf4j;
  * @Date: 2020/10/5 15:21
  */
 @Slf4j
-@RequiredArgsConstructor
 public class PT1 extends AbstractIndividualPTBehavior {
-    private final Integer index;
+    final private CallDTFromPTInputApi callDTFromPTInputApi;
 
-    private final CallDTFromPTInputApi callDTFromPTInputApi;
+    final private CallDTFromPTOutputApi callDTFromPTOutputApi;
 
-    private final CallDTFromPTOutputApi callDTFromPTOutputApi;
-
-    private final CallPTFromNeighborApi callPTFromNeighborApi;
+    final private CallPTFromNeighborApi callPTFromNeighborApi;
 
     private Boolean primary = true;
+
+    public PT1(Integer index, Long taskTime,
+               CallDTFromPTInputApi callDTFromPTInputApi,
+               CallDTFromPTOutputApi callDTFromPTOutputApi,
+               CallPTFromNeighborApi callPTFromNeighborApi) {
+        super(index, taskTime);
+        this.callDTFromPTInputApi = callDTFromPTInputApi;
+        this.callDTFromPTOutputApi = callDTFromPTOutputApi;
+        this.callPTFromNeighborApi = callPTFromNeighborApi;
+    }
 
     @Override
     protected void preStartTask(PTTask ptTask) {
@@ -44,10 +50,5 @@ public class PT1 extends AbstractIndividualPTBehavior {
             callPTFromNeighborApi.call(4, product);
         }
         callDTFromPTOutputApi.call(index, product);
-    }
-
-    @Override
-    protected long getTaskTime() {
-        return 1000L;
     }
 }

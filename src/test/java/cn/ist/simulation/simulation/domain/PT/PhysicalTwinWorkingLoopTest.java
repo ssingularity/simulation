@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class PhysicalTwinWorkingLoopTest {
     PhysicalTwinWorkingLoop physicalTwinWorkingLoop;
 
-    TestIndividualPTBehavior testIndividualPTBehavior = new TestIndividualPTBehavior();
+    TestIndividualPTBehavior testIndividualPTBehavior = new TestIndividualPTBehavior(1, 1000L);
 
     @BeforeEach
     public void init() {

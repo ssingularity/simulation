@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class DigitalTwinWorkingLoopTest {
     DigitalTwinWorkingLoop digitalTwinWorkingLoop;
 
-    TestIndividualDTBehavior testIndividualDTBehavior = new TestIndividualDTBehavior();
+    TestIndividualDTBehavior testIndividualDTBehavior = new TestIndividualDTBehavior(0, 1000L);
 
     @BeforeEach
     void init() {

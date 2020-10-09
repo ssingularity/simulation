@@ -1,16 +1,22 @@
 package cn.ist.simulation.simulation.domain.DT;
 
 import cn.ist.simulation.simulation.domain.Product;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @Author: ssingualrity
  * @Date: 2020/9/19 14:26
  */
+@RequiredArgsConstructor
 public abstract class AbstractIndividualDTBehavior {
+    final protected Integer index;
+
+    final private Long taskTime;
+
     void doTask(DTTask dtTask, Long sliceTime) {
         if (dtTask.isWaiting()) {
             preStartTask(dtTask);
-            dtTask.runWith(getTaskTime());
+            dtTask.runWith(taskTime);
         }
         dtTask.elapse(sliceTime);
     }
@@ -26,10 +32,4 @@ public abstract class AbstractIndividualDTBehavior {
      * @param product 完成的产物
      */
     public abstract void doOutput(Product product);
-
-    /**
-     * 返回task需要执行的时间
-     * @return long task需要执行的时间
-     */
-    protected abstract long getTaskTime();
 }

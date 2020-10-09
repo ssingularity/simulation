@@ -1,19 +1,22 @@
 package cn.ist.simulation.simulation.application.service;
 
-import cn.ist.simulation.simulation.application.port.in.*;
+import cn.ist.simulation.simulation.application.port.in.CreateDigitalTwinUseCase;
+import cn.ist.simulation.simulation.application.port.in.CreatePhysicalTwinUseCase;
+import cn.ist.simulation.simulation.application.port.in.CreateTwinCommand;
+import cn.ist.simulation.simulation.application.port.in.CreateTwinUseCase;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @Author: ssingualrity
  * @Date: 2020/9/17 12:48
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateTwinUseCaseImpl implements CreateTwinUseCase {
-    CreateDigitalTwinUseCase createDigitalTwinUseCase;
+    final private CreateDigitalTwinUseCase createDigitalTwinUseCase;
 
-    CreatePhysicalTwinUseCase createPhysicalTwinUseCase;
+    final private CreatePhysicalTwinUseCase createPhysicalTwinUseCase;
 
     @Override
     public Boolean createTwin(CreateTwinCommand createTwinCommand) {

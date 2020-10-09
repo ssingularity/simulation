@@ -12,14 +12,14 @@ import java.util.Set;
  */
 @Data
 public class PhysicalTwin {
-    private Integer id;
+    final private Integer index;
 
     final private Set<Neighbor> inputNeighbor = new HashSet<>();
 
     final private Set<Neighbor> outputNeighbor = new HashSet<>();
 
-    public PhysicalTwin(Integer id) {
-        this.id = id;
+    public PhysicalTwin(Integer index) {
+        this.index = index;
     }
 
     public void resetNeighbor() {

@@ -9,22 +9,22 @@ import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StorePhysicalTwinPort;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 import cn.ist.simulation.simulation.domain.PT.PhysicalTwin;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.util.Assert;
 
 /**
  * @Author: ssingualrity
  * @Date: 2020/9/17 12:23
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CreateTopologyUseCaseImpl implements CreateTopologyUseCase {
-    FetchPhysicalTwinPort fetchPhysicalTwinPort;
+    final private FetchPhysicalTwinPort fetchPhysicalTwinPort;
 
-    FetchDigitalTwinPort fetchDigitalTwinPort;
+    final private FetchDigitalTwinPort fetchDigitalTwinPort;
 
-    StorePhysicalTwinPort storePhysicalTwinPort;
+    final private StorePhysicalTwinPort storePhysicalTwinPort;
 
-    StoreDigitalTwinPort storeDigitalTwinPort;
+    final private StoreDigitalTwinPort storeDigitalTwinPort;
 
     @Override
     public Boolean createTopology(CreateTopologyCommand createTopologyCommand) {

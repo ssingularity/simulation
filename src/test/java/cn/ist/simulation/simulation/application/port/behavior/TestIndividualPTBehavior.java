@@ -11,6 +11,10 @@ import cn.ist.simulation.simulation.domain.Product;
 public class TestIndividualPTBehavior extends AbstractIndividualPTBehavior {
     public int workingProduct = 0;
 
+    public TestIndividualPTBehavior(Integer index, Long taskTime) {
+        super(index, taskTime);
+    }
+
     @Override
     protected void preStartTask(PTTask ptTask) {
         this.workingProduct++;
@@ -19,10 +23,5 @@ public class TestIndividualPTBehavior extends AbstractIndividualPTBehavior {
     @Override
     public void doOutput(Product product) {
         this.workingProduct--;
-    }
-
-    @Override
-    protected long getTaskTime() {
-        return 1000L;
     }
 }
