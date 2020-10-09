@@ -38,8 +38,8 @@ class CreateTopologyUseCaseImplTest {
     @BeforeEach
     void init() {
         this.createTopologyUseCase = new CreateTopologyUseCaseImpl(fetchPhysicalTwinPort, fetchDigitalTwinPort, storePhysicalTwinPort, storeDigitalTwinPort);
-        physicalTwin = new PhysicalTwin(0, "");
-        digitalTwin = new DigitalTwin(0, "");
+        physicalTwin = new PhysicalTwin(0);
+        digitalTwin = new DigitalTwin(0);
         Mockito.when(fetchDigitalTwinPort.fetchDigitalTwin(0)).thenReturn(digitalTwin);
         Mockito.when(fetchPhysicalTwinPort.fetchPhysicalTwin(0)).thenReturn(physicalTwin);
         Mockito.when(fetchPhysicalTwinPort.existsByIndex(0)).thenReturn(true);

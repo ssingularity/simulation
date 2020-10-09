@@ -2,6 +2,7 @@ package cn.ist.simulation.simulation.application.port.in;
 
 import cn.ist.simulation.simulation.common.SelfValidating;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @Date: 2020/9/17 12:58
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class CreateTopologyCommand extends SelfValidating<CreateTopologyCommand> {
 
     @NotNull

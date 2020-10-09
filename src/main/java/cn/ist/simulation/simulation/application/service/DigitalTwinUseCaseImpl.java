@@ -1,12 +1,11 @@
 package cn.ist.simulation.simulation.application.service;
 
 import cn.ist.simulation.simulation.application.port.in.CreateDigitalTwinUseCase;
-import cn.ist.simulation.simulation.application.port.in.InputDigitalTwinUseCase;
 import cn.ist.simulation.simulation.application.port.out.FetchDigitalTwinPort;
 import cn.ist.simulation.simulation.application.port.out.StoreDigitalTwinPort;
-import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
+import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
 import lombok.Data;
 
 import java.util.Map;
@@ -19,7 +18,7 @@ import java.util.concurrent.Executors;
  * @Date: 2020/9/17 12:46
  */
 @Data
-public class DigitalTwinUseCaseImpl implements CreateDigitalTwinUseCase, InputDigitalTwinUseCase {
+public class DigitalTwinUseCaseImpl implements CreateDigitalTwinUseCase {
     final private FetchDigitalTwinPort fetchDigitalTwinPort;
 
     final private StoreDigitalTwinPort storeDigitalTwinPort;

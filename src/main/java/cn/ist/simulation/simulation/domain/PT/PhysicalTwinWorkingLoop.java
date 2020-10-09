@@ -22,6 +22,9 @@ public class PhysicalTwinWorkingLoop extends WorkingLoop {
         this.individualPTBehavior = individualPTBehavior;
     }
 
+    /**
+     * 完成基于切片方式的任务处理，其中任务的处理通过Sleep的方式切片模拟
+     */
     @Override
     public void doTask() {
         Iterator<PTTask> it = onGoingPTTask.iterator();

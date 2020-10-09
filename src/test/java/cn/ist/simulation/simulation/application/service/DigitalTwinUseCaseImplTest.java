@@ -30,7 +30,7 @@ class DigitalTwinUseCaseImplTest {
     @Test
     void createDigitalTwin() {
         Mockito.when(fetchDigitalTwinPort.existsByIndex(0)).thenReturn(false);
-        this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0, ""), individualDTBehavior);
+        this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0), individualDTBehavior);
         Assertions.assertThat(this.digitalTwinUseCase.getWorkingLoopMap()).size().isEqualTo(1);
         Assertions.assertThat(this.digitalTwinUseCase.getWorkingLoopMap()).containsKeys(0);
     }
@@ -38,6 +38,6 @@ class DigitalTwinUseCaseImplTest {
     @Test
     void createDigitalExistingTwin() {
         Mockito.when(fetchDigitalTwinPort.existsByIndex(0)).thenReturn(true);
-        Assertions.assertThatThrownBy(() -> this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0, ""), individualDTBehavior)).isInstanceOf(RuntimeException.class);
+        Assertions.assertThatThrownBy(() -> this.digitalTwinUseCase.createDigitalTwin(new DigitalTwin(0), individualDTBehavior)).isInstanceOf(RuntimeException.class);
     }
 }

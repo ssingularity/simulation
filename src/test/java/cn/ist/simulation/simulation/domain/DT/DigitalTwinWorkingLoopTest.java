@@ -28,16 +28,16 @@ class DigitalTwinWorkingLoopTest {
         DTInput dtInput = new DTInput();
         dtInput.setProduct(product);
 
-        digitalTwinWorkingLoop.handleInputFromNeighbor(dtInput);
+        digitalTwinWorkingLoop.handleNeighborInput(dtInput);
 
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
-        digitalTwinWorkingLoop.handleInputFromPt(product);
+        digitalTwinWorkingLoop.handlePTInput(product);
 
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
 
-        digitalTwinWorkingLoop.handleOutputFromPt(product);
+        digitalTwinWorkingLoop.handlePTOutput(product);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }
@@ -54,21 +54,21 @@ class DigitalTwinWorkingLoopTest {
         DTInput laterDtInput = new DTInput();
         laterDtInput.setProduct(laterProduct);
 
-        digitalTwinWorkingLoop.handleInputFromNeighbor(firstDtInput);
-        digitalTwinWorkingLoop.handleInputFromNeighbor(laterDtInput);
+        digitalTwinWorkingLoop.handleNeighborInput(firstDtInput);
+        digitalTwinWorkingLoop.handleNeighborInput(laterDtInput);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
 
-        digitalTwinWorkingLoop.handleInputFromPt(laterProduct);
+        digitalTwinWorkingLoop.handlePTInput(laterProduct);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
 
-        digitalTwinWorkingLoop.handleInputFromPt(firstProduct);
+        digitalTwinWorkingLoop.handlePTInput(firstProduct);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(2);
 
-        digitalTwinWorkingLoop.handleOutputFromPt(firstProduct);
-        digitalTwinWorkingLoop.handleOutputFromPt(laterProduct);
+        digitalTwinWorkingLoop.handlePTOutput(firstProduct);
+        digitalTwinWorkingLoop.handlePTOutput(laterProduct);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }
@@ -81,11 +81,11 @@ class DigitalTwinWorkingLoopTest {
         DTInput dtInput = new DTInput();
         dtInput.setProduct(product);
 
-        digitalTwinWorkingLoop.handleInputFromNeighbor(dtInput);
+        digitalTwinWorkingLoop.handleNeighborInput(dtInput);
 
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
-        digitalTwinWorkingLoop.handleInputFromPt(product);
+        digitalTwinWorkingLoop.handlePTInput(product);
 
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
@@ -93,7 +93,7 @@ class DigitalTwinWorkingLoopTest {
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(1);
 
-        digitalTwinWorkingLoop.handleOutputFromPt(product);
+        digitalTwinWorkingLoop.handlePTOutput(product);
         digitalTwinWorkingLoop.doTask();
         Assertions.assertThat(testIndividualDTBehavior.workingProduct).isEqualTo(0);
     }

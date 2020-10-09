@@ -18,9 +18,8 @@ public class CreateTwinUseCaseImpl implements CreateTwinUseCase {
     @Override
     public Boolean createTwin(CreateTwinCommand createTwinCommand) {
         Integer index = createTwinCommand.getIndex();
-        String url = createTwinCommand.getUrl();
-        createDigitalTwinUseCase.createDigitalTwin(new DigitalTwin(index, url), createTwinCommand.getIndividualDTBehavior());
-        createPhysicalTwinUseCase.createPhysicalTwin(new PhysicalTwin(index, url), createTwinCommand.getIndividualPTBehavior());
+        createDigitalTwinUseCase.createDigitalTwin(new DigitalTwin(index), createTwinCommand.getIndividualDTBehavior());
+        createPhysicalTwinUseCase.createPhysicalTwin(new PhysicalTwin(index), createTwinCommand.getIndividualPTBehavior());
         return true;
     }
 

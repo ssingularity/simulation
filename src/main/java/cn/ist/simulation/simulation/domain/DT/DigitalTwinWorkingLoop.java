@@ -38,12 +38,12 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
      *
      * 大致流程如下：
      * 1. 检查因果关系以及是否存在可以开始处理的Task
-     * 2. 完成业务场景
+     * 2. 通过Sleep的方式切片模拟完成业务场景
      * 3. 处理输出
      */
     @Override
     public void doTask() {
-        //TODO 可能需要检查一下是否OverLoad了
+        //TODO 检查是否OverLoad了
         checkCausality();
         processTasks();
         processFinishedDTInput();
@@ -58,6 +58,7 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
             Iterator<Product> productIterator = physicalTwinInputList.iterator();
             while (productIterator.hasNext()) {
                 Product product = productIterator.next();
+                //FIXME 不能简单地通过Id进行比较应该增加From属性
                 if (product.getId().equals(dtId)) {
                     causalityMatched = true;
                     productIterator.remove();
@@ -95,8 +96,9 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
             Iterator<Product> ptIt = physicalTwinOutputList.iterator();
             while (ptIt.hasNext()) {
                 Product ptOutput = ptIt.next();
+                //FIXME 不能简单地通过Id进行比较应该增加From属性
                 if (ptOutput.getId().equals(finishedDTInput.getId())) {
-                    individualDTBehavior.doOutput(finishedDTInput);
+                    individualDTBehavior.doOutput(finishedDTInput.getProduct());
                     ptIt.remove();
                     it.remove();
                     break;
@@ -105,16 +107,16 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
         }
     }
 
-    public void handleInputFromNeighbor(DTInput dtInput) {
+    public void handleNeighborInput(DTInput dtInput) {
         this.digitalTwinInputList.add(dtInput);
     }
 
-    public void handleInputFromPt(Product product) {
-        this.physicalTwinInputList.add(product);
+    public void handlePTInput(Product input) {
+        this.physicalTwinInputList.add(input);
     }
 
-    public void handleOutputFromPt(Product product) {
-        this.physicalTwinOutputList.add(product);
+    public void handlePTOutput(Product output) {
+        this.physicalTwinOutputList.add(output);
     }
 
     public void handleStateUpdateFromNeighbor() {

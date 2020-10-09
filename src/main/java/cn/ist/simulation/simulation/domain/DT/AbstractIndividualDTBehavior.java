@@ -1,5 +1,7 @@
 package cn.ist.simulation.simulation.domain.DT;
 
+import cn.ist.simulation.simulation.domain.Product;
+
 /**
  * @Author: ssingualrity
  * @Date: 2020/9/19 14:26
@@ -23,7 +25,7 @@ public abstract class AbstractIndividualDTBehavior {
      * 根据各自状态完成对应的输出
      * @param product 完成的产物
      */
-    public abstract void doOutput(DTInput product);
+    public abstract void doOutput(Product product);
 
     /**
      * 返回task需要执行的时间

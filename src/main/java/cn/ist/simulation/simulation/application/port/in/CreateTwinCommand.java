@@ -4,6 +4,7 @@ import cn.ist.simulation.simulation.common.SelfValidating;
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,12 +13,10 @@ import javax.validation.constraints.NotNull;
  * @Date: 2020/9/17 12:49
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class CreateTwinCommand extends SelfValidating<CreateTwinCommand> {
     @NotNull
     final Integer index;
-
-    @NotNull
-    final String url;
 
     @NotNull
     final AbstractIndividualDTBehavior individualDTBehavior;
@@ -25,9 +24,8 @@ public class CreateTwinCommand extends SelfValidating<CreateTwinCommand> {
     @NotNull
     final AbstractIndividualPTBehavior individualPTBehavior;
 
-    public CreateTwinCommand(Integer index, String url, AbstractIndividualDTBehavior individualDTBehavior, AbstractIndividualPTBehavior individualPTBehavior) {
+    public CreateTwinCommand(Integer index, AbstractIndividualDTBehavior individualDTBehavior, AbstractIndividualPTBehavior individualPTBehavior) {
         this.index = index;
-        this.url = url;
         this.individualDTBehavior = individualDTBehavior;
         this.individualPTBehavior = individualPTBehavior;
         this.validateSelf();

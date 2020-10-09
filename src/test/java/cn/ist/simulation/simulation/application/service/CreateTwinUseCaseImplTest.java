@@ -31,8 +31,8 @@ class CreateTwinUseCaseImplTest {
 
     @Test
     void createTwin() {
-        this.createTwinUseCase.createTwin(new CreateTwinCommand(0, "", individualDTBehavior, individualPTBehavior));
-        Mockito.verify(createDigitalTwinUseCase).createDigitalTwin(new DigitalTwin(0, ""), individualDTBehavior);
-        Mockito.verify(createPhysicalTwinUseCase).createPhysicalTwin(new PhysicalTwin(0, ""), individualPTBehavior);
+        this.createTwinUseCase.createTwin(new CreateTwinCommand(0, individualDTBehavior, individualPTBehavior));
+        Mockito.verify(createDigitalTwinUseCase).createDigitalTwin(new DigitalTwin(0), individualDTBehavior);
+        Mockito.verify(createPhysicalTwinUseCase).createPhysicalTwin(new PhysicalTwin(0), individualPTBehavior);
     }
 }

@@ -14,15 +14,12 @@ import java.util.Set;
 public class PhysicalTwin {
     private Integer id;
 
-    final private String selfUrl;
-
     final private Set<Neighbor> inputNeighbor = new HashSet<>();
 
     final private Set<Neighbor> outputNeighbor = new HashSet<>();
 
-    public PhysicalTwin(Integer id, String selfUrl) {
+    public PhysicalTwin(Integer id) {
         this.id = id;
-        this.selfUrl = selfUrl;
     }
 
     public void resetNeighbor() {

@@ -1,7 +1,9 @@
 package cn.ist.simulation.simulation.domain.DT;
 
 import cn.ist.simulation.simulation.domain.Product;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,8 @@ import java.util.Map;
  * @Date: 2020/9/19 16:13
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DTInput {
     private Product product;
 

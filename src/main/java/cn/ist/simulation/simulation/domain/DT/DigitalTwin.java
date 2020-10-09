@@ -14,15 +14,12 @@ import java.util.Set;
 public class DigitalTwin {
     final private Integer index;
 
-    final private String selfUrl;
-
     final private Set<Neighbor> inputNeighbor = new HashSet<>();
 
     final private Set<Neighbor> outputNeighbor = new HashSet<>();
 
-    public DigitalTwin(Integer index, String selfUrl) {
+    public DigitalTwin(Integer index) {
         this.index = index;
-        this.selfUrl = selfUrl;
     }
 
     public void resetNeighbor() {
