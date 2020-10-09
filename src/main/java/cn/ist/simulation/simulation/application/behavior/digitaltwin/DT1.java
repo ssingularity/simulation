@@ -37,7 +37,7 @@ public class DT1 extends AbstractIndividualDTBehavior {
         product.setSender("DT" + index);
         DTInput dtInput = new DTInput(product, V);
         //TODO 更新V
-        if (product.getType() == ProductType.TYPE1 || (product.getType() == ProductType.TYPE2 && primary == true)) {
+        if (product.getType() == ProductType.TYPE1 || (product.getType() == ProductType.TYPE2 && this.primary)) {
             callDTFromNeighborApi.call(3, dtInput);
         }
         else {
