@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class TwinUseCaseConfig {
-    @Bean
+    @Bean(destroyMethod = "destroy")
     DigitalTwinUseCaseImpl digitalTwinUseCase(FetchDigitalTwinPort fetchDigitalTwinPort,
                                               StoreDigitalTwinPort storeDigitalTwinPort) {
         return new DigitalTwinUseCaseImpl(fetchDigitalTwinPort, storeDigitalTwinPort);
