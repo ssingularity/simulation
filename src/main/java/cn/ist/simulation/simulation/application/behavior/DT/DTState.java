@@ -1,4 +1,4 @@
-package cn.ist.simulation.simulation.application.behavior.digitaltwin;
+package cn.ist.simulation.simulation.application.behavior.DT;
 
 import lombok.Data;
 

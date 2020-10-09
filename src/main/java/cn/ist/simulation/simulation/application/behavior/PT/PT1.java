@@ -1,4 +1,4 @@
-package cn.ist.simulation.simulation.application.behavior.physicaltwin;
+package cn.ist.simulation.simulation.application.behavior.PT;
 
 import cn.ist.simulation.simulation.application.port.out.CallDTFromPTInputApi;
 import cn.ist.simulation.simulation.application.port.out.CallDTFromPTOutputApi;

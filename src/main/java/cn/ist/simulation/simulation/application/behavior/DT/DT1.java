@@ -1,4 +1,4 @@
-package cn.ist.simulation.simulation.application.behavior.digitaltwin;
+package cn.ist.simulation.simulation.application.behavior.DT;
 
 import cn.ist.simulation.simulation.application.port.out.CallDTFromNeighborApi;
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
