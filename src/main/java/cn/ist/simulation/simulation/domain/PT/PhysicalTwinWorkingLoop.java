@@ -38,6 +38,11 @@ public class PhysicalTwinWorkingLoop extends WorkingLoop {
         }
     }
 
+    @Override
+    protected void reset() {
+        this.onGoingPTTask.clear();
+    }
+
     public void handleInput(Product product) {
         this.onGoingPTTask.add(new PTTask(product));
     }

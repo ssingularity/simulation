@@ -17,15 +17,21 @@ public abstract class WorkingLoop implements Runnable{
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
-            doTask();
             try {
+                doTask();
                 Thread.sleep(sliceTime);
             } catch (InterruptedException e) {
                 log.info("Exit From WorkingLoop");
                 break;
+            } catch (Exception e) {
+                log.error("", e);
+                log.warn("Reset WorkingLoop");
+                reset();
             }
         }
     }
 
     public abstract void doTask();
+
+    protected abstract void reset();
 }

@@ -49,6 +49,15 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
         processFinishedDTInput();
     }
 
+    @Override
+    protected void reset() {
+        this.physicalTwinInputList.clear();
+        this.physicalTwinOutputList.clear();
+        this.digitalTwinInputList.clear();
+        this.onGoingDTTask.clear();
+        this.finishedDTInputList.clear();
+    }
+
     private void checkCausality() {
         Iterator<DTInput> dtInputIterator = digitalTwinInputList.iterator();
         while (dtInputIterator.hasNext()) {
