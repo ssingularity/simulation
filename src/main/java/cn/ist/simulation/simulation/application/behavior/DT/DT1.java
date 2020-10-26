@@ -4,8 +4,11 @@ import cn.ist.simulation.simulation.application.port.out.CallDTFromNeighborApi;
 import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DT.DTInput;
 import cn.ist.simulation.simulation.domain.DT.DTTask;
-import cn.ist.simulation.simulation.domain.Product;
-import cn.ist.simulation.simulation.domain.ProductType;
+import cn.ist.simulation.simulation.domain.DT.Instruction;
+import cn.ist.simulation.simulation.domain.product.Product;
+import cn.ist.simulation.simulation.domain.product.ProductColor;
+import cn.ist.simulation.simulation.domain.product.ProductState;
+import cn.ist.simulation.simulation.domain.product.ProductType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -21,7 +24,7 @@ public class DT1 extends AbstractIndividualDTBehavior {
 
     final private Map<Integer, Integer> V = new HashMap<>();
 
-    private Boolean primary = true;
+    boolean primary = true;
 
     public DT1(Integer index, Long taskTime, CallDTFromNeighborApi callDTFromNeighborApi) {
         super(index, taskTime);
@@ -34,15 +37,31 @@ public class DT1 extends AbstractIndividualDTBehavior {
     }
 
     @Override
+    protected void handleInstruction(Instruction instruction) {
+        this.primary = (boolean) instruction.get("primary");
+    }
+
+    @Override
     public void doOutput(Product product) {
         product.setSender("DT" + index);
-        DTInput dtInput = new DTInput(product, V);
-        //TODO 更新V
-        if (product.getType() == ProductType.TYPE1 || (product.getType() == ProductType.TYPE2 && this.primary)) {
-            callDTFromNeighborApi.call(3, dtInput);
+        if (this.primary) {
+            if (product.getType() == ProductType.TYPE1) {
+                product.setColor(ProductColor.RED);
+            }
+            else if (product.getType() == ProductType.TYPE2) {
+                product.setColor(ProductColor.BLUE);
+            }
         }
         else {
-            callDTFromNeighborApi.call(4, dtInput);
+            if (product.getType() == ProductType.TYPE1) {
+                product.setColor(ProductColor.YELLOW);
+            }
+            else if (product.getType() == ProductType.TYPE2) {
+                product.setColor(ProductColor.GREEN);
+            }
         }
+        product.setState(ProductState.Empty);
+        DTInput dtInput = new DTInput(product, V);
+        callDTFromNeighborApi.call(2, dtInput);
     }
 }

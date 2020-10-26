@@ -1,7 +1,7 @@
 package cn.ist.simulation.simulation.domain.DT;
 
 import cn.ist.simulation.simulation.application.port.behavior.TestIndividualDTBehavior;
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

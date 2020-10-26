@@ -1,4 +1,4 @@
-package cn.ist.simulation.simulation.domain;
+package cn.ist.simulation.simulation.domain.product;
 
 import lombok.Data;
 
@@ -16,10 +16,9 @@ public class Product {
 
     private ProductType type;
 
-    /**
-     * sealing machine selection, 1 for SEALING_MACHINE1 and 2 for SEALING_MACHINE2
-     */
-    private short sm;
+    private ProductColor color;
+
+    private ProductTag tag;
 
     private long timestamp;
 

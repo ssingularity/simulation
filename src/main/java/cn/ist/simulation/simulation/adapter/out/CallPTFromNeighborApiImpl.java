@@ -1,7 +1,7 @@
 package cn.ist.simulation.simulation.adapter.out;
 
 import cn.ist.simulation.simulation.application.port.out.CallPTFromNeighborApi;
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package cn.ist.simulation.simulation.domain.DT;
 
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import cn.ist.simulation.simulation.domain.WorkingLoop;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +27,10 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     final private List<DTInput> finishedDTInputList = Collections.synchronizedList(new ArrayList<>());
 
+    final private List<Instruction> instructionList = Collections.synchronizedList(new ArrayList<>());
+
+    //TODO 模拟故障
+
     public DigitalTwinWorkingLoop(long sliceTime, AbstractIndividualDTBehavior individualDTBehavior) {
         super(sliceTime);
         this.individualDTBehavior = individualDTBehavior;
@@ -40,13 +44,14 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
      * 1. 检查因果关系以及是否存在可以开始处理的Task
      * 2. 通过Sleep的方式切片模拟完成业务场景
      * 3. 处理输出
+     * 4. 处理Agent发来的指令
      */
     @Override
     public void doTask() {
-        //TODO 检查是否OverLoad了
         checkCausality();
         processTasks();
         processFinishedDTInput();
+        processInstructionList();
     }
 
     @Override
@@ -116,6 +121,15 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
         }
     }
 
+    private void processInstructionList() {
+        Iterator<Instruction> it = instructionList.iterator();
+        while (it.hasNext()) {
+            Instruction instruction = it.next();
+            individualDTBehavior.handleInstruction(instruction);
+            it.remove();
+        }
+    }
+
     public void handleNeighborInput(DTInput dtInput) {
         this.digitalTwinInputList.add(dtInput);
     }
@@ -126,6 +140,10 @@ public class DigitalTwinWorkingLoop extends WorkingLoop {
 
     public void handlePTOutput(Product output) {
         this.physicalTwinOutputList.add(output);
+    }
+
+    public void handleInstruction(Instruction instruction) {
+        this.instructionList.add(instruction);
     }
 
     public void handleStateUpdateFromNeighbor() {

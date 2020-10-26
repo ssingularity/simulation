@@ -1,6 +1,6 @@
 package cn.ist.simulation.simulation.application.port.out;
 
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 
 /**
  * @Author: ssingualrity

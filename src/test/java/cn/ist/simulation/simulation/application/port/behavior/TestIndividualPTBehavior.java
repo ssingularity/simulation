@@ -2,7 +2,7 @@ package cn.ist.simulation.simulation.application.port.behavior;
 
 import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
 import cn.ist.simulation.simulation.domain.PT.PTTask;
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 
 /**
  * @Author: ssingualrity

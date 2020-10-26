@@ -9,7 +9,7 @@ import cn.ist.simulation.simulation.domain.DT.AbstractIndividualDTBehavior;
 import cn.ist.simulation.simulation.domain.DT.DTInput;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwin;
 import cn.ist.simulation.simulation.domain.DT.DigitalTwinWorkingLoop;
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

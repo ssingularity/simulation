@@ -1,6 +1,6 @@
 package cn.ist.simulation.simulation.domain.DT;
 
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -26,6 +26,12 @@ public abstract class AbstractIndividualDTBehavior {
      * @param dtTask 任务
      */
     protected abstract void preStartTask(DTTask dtTask);
+
+    /**
+     * 处理Agent的指令
+     * @param instruction Agent发来的指令
+     */
+    protected abstract void handleInstruction(Instruction instruction);
 
     /**
      * 根据各自状态完成对应的输出

@@ -1,6 +1,6 @@
 package cn.ist.simulation.simulation.domain.PT;
 
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import lombok.RequiredArgsConstructor;
 
 /**

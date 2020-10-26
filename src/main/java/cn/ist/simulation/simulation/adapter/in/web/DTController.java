@@ -2,7 +2,7 @@ package cn.ist.simulation.simulation.adapter.in.web;
 
 import cn.ist.simulation.simulation.application.port.in.InputDigitalTwinUseCase;
 import cn.ist.simulation.simulation.domain.DT.DTInput;
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

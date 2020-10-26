@@ -5,8 +5,8 @@ import cn.ist.simulation.simulation.application.port.out.CallDTFromPTOutputApi;
 import cn.ist.simulation.simulation.application.port.out.CallPTFromNeighborApi;
 import cn.ist.simulation.simulation.domain.PT.AbstractIndividualPTBehavior;
 import cn.ist.simulation.simulation.domain.PT.PTTask;
-import cn.ist.simulation.simulation.domain.Product;
-import cn.ist.simulation.simulation.domain.ProductType;
+import cn.ist.simulation.simulation.domain.product.Product;
+import cn.ist.simulation.simulation.domain.product.ProductType;
 import lombok.extern.slf4j.Slf4j;
 
 /**

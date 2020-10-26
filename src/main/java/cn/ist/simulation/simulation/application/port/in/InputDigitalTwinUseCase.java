@@ -1,7 +1,7 @@
 package cn.ist.simulation.simulation.application.port.in;
 
 import cn.ist.simulation.simulation.domain.DT.DTInput;
-import cn.ist.simulation.simulation.domain.Product;
+import cn.ist.simulation.simulation.domain.product.Product;
 
 /**
  * @Author: ssingualrity
